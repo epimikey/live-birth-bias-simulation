@@ -5,7 +5,7 @@ library(dplyr)
 set.seed(123)
 
 lbb <- function(iter, n, p, mean, sd, con, 
-                bL, bY, or1, or2, or3, or4, or5, nU)
+                bL, bY, or1, or2, or3, or4, or5)
   
 {
   ## iter   number of iterations
