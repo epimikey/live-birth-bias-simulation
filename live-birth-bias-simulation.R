@@ -133,6 +133,7 @@ lbb <- function(iter, n, p, mean, sd, con,
     
 }
 
+# example inputs
 lbb(iter=1000, n=100000, p=0.75, mean=16.7, sd=4.3, con=5.85,
     bL=0.05, bY=0.015, or1=2, or2=2, or3=2, or4=2, or5=1)
 
