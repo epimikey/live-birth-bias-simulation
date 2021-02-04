@@ -2,7 +2,7 @@ library(Rlab)
 library(dplyr)
 
 # set seed
-set.seed(123)
+set.seed()
 
 lbb <- function(iter, n, p, mean, sd, con, 
                 bL, bY, or1, or2, or3, or4, or5)
