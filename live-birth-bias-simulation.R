@@ -21,8 +21,7 @@ lbb <- function(iter, n, p, mean, sd, con,
   ## or3    odds ratio for exposure*U loss interaction effect
   ## or4    odds ratio for U-outcome effect
   ## or5    odds ratio for exposure-outcome effect
-  ## nU    number of Us
-  
+
   # create matrix to store simulation results
   results.cs <- rep(NA, iter)
   results.dos <- rep(NA, iter)
@@ -46,9 +45,9 @@ lbb <- function(iter, n, p, mean, sd, con,
     cs <- data.frame("id" = 1:n) %>%
       mutate(no2 = rnorm(n, mean_std, sd_std), # exposure is gaussian
              U = rbern(n, p), 
-             prob_loss = plogis(log(bL) + log(or1)*no2 + nU*log(or2)*U),
+             prob_loss = plogis(log(bL) + log(or1)*no2 + log(or2)*U),
              loss = rbern(n, prob_loss),
-             pY = plogis(log(bY) + nU*log(or4)*U + log(or5)*no2),
+             pY = plogis(log(bY) + log(or4)*U + log(or5)*no2),
              Y = rbern(n, pY))
     
     # fit a logistic model among live births
@@ -68,9 +67,9 @@ lbb <- function(iter, n, p, mean, sd, con,
     dos <- data.frame("id" = 1:n) %>%
       mutate(no2 = rnorm(n, mean_std, sd_std),
              U = rbern(n, p),
-             prob_loss = plogis(log(bL) + nU*log(or3)*no2*U),
+             prob_loss = plogis(log(bL) + log(or3)*no2*U),
              loss = rbern(n, prob_loss),
-             pY = plogis(log(bY) + nU*log(or4)*U + log(or5)*no2),
+             pY = plogis(log(bY) + log(or4)*U + log(or5)*no2),
              Y = rbern(n, pY))
     
     # fit a logistic model among live births
@@ -90,9 +89,9 @@ lbb <- function(iter, n, p, mean, sd, con,
     both <- data.frame("id" = 1:n) %>%
       mutate(no2 = rnorm(n, mean_std, sd_std),
              U = rbern(n, p),
-             prob_loss = plogis(log(bL) + log(or1)*no2 + nU*log(or2)*U + nU*log(or3)*no2*U),
+             prob_loss = plogis(log(bL) + log(or1)*no2 + log(or2)*U + log(or3)*no2*U),
              loss = rbern(n, prob_loss),
-             pY = plogis(log(bY) + nU*log(or4)*U + log(or5)*no2),
+             pY = plogis(log(bY) + log(or4)*U + log(or5)*no2),
              Y = rbern(n, pY))
     
     # fit a logistic model among live births
@@ -135,5 +134,5 @@ lbb <- function(iter, n, p, mean, sd, con,
 }
 
 lbb(iter=1000, n=100000, p=0.75, mean=16.7, sd=4.3, con=5.85,
-    bL=0.05, bY=0.015, or1=3, or2=3, or3=3, or4=3, or5=1, nU=1)
+    bL=0.05, bY=0.015, or1=2, or2=2, or3=2, or4=2, or5=1)
 
